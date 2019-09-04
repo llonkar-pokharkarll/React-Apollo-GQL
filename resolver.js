@@ -1,5 +1,3 @@
-import Recipe from './models/receipe';
-import User from './user';
 import { ApolloError } from 'apollo-server';
 
 export const resolvers = {
