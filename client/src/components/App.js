@@ -1,25 +1,10 @@
 import React from 'react';
-import { Query } from 'react-apollo';
-
-
+import Recipes from '../queries/queryComponent';
 
 function App() {
   return (
     <div >
-      Home
-      <Query>
-        {({ data, loading, error }) => {
-          if (error) {
-            return <h1>{error.message}</h1>
-          }
-          if (loading) {
-            return <h1>loading..</h1>
-          }
-          if (data) {
-            return <h1>Recipe</h1>
-          }
-        }}
-      </Query>
+      <Recipes />
     </div>
   );
 }

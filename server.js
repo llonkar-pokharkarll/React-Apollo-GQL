@@ -3,15 +3,10 @@ import express from "express";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import { Recipe } from './models/receipe';
-import { User } from './user';
+import { User } from './models/user';
 import { typeDefs } from './schema.js';
 import { resolvers } from './resolver';
 import { ApolloServer } from 'apollo-server';
-
-// const schema = makeExecutableSchema({
-//   typeDefs,
-//   resolvers
-// })
 
 dotenv.config();
 
@@ -24,8 +19,6 @@ mongoose
 
 const app = express();
 
-// const PORT = process.env.PORT || 3000;
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -34,17 +27,5 @@ const server = new ApolloServer({
     User
   })
 });
-
-// app.use('/graphql', graphiqlExpress({ endpointURL: '/graphql' }));
-
-// app.use('graphql', graphqlExpress({
-//   schema,
-//   context: {
-//     Recipe,
-//     User
-//   }
-// }))
-
-// app.listen(PORT, () => console.log(`server running on PORT : ${PORT}`));
 
 server.listen().then(({ url }) => console.log(`Server ready at ${url}`));

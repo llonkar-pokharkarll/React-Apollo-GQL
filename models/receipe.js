@@ -4,19 +4,19 @@ const schema = mongoose.Schema;
 const RecipeSchema = new schema({
   name: {
     type: String,
-    required: true
+
   },
   category: {
     type: String,
-    required: true
+
   },
   description: {
     type: String,
-    required: true
+
   },
   instructions: {
     type: String,
-    required: true
+
   },
   createdDate: {
     type: Date,
@@ -28,7 +28,7 @@ const RecipeSchema = new schema({
   },
   username: {
     type: String,
-    required: true
+
   },
 });
 

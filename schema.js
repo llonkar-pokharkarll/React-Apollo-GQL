@@ -16,7 +16,7 @@ type User {
   username:String!
   password:String!
   email:String!
-  joinDate:String!
+  joinDate:String
   favourites :[Recipe]
 }
 
@@ -27,14 +27,14 @@ type Query {
 
 type Mutation {
   addRecipe (input:RecipeInput) : Recipe
-  addUser (input:UserInput) : User
+  # addUser (input:UserInput) : User
+  signUp (input:UserInput): Token
 }
 
 input UserInput {
   username:String!
   password:String!
   email:String!
-  joinDate:String!
 }
 
 input RecipeInput {
@@ -44,4 +44,9 @@ input RecipeInput {
   instructions:String!
   username:String!
 } 
+
+type Token {
+  token :String
+}
+
 `;
