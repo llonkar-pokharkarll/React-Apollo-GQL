@@ -1,52 +1,50 @@
 import { gql } from 'apollo-server';
 export const typeDefs = gql`
-type Recipe {
-  _id:ID
-  name:String!
-  category:String!
-  description:String!
-  instructions:String!
-  createdDate:String
-  likes:Int
-  username:String!
-}
+	type Recipe {
+		_id: ID
+		name: String!
+		category: String!
+		description: String!
+		instructions: String!
+		createdDate: String
+		likes: Int
+		username: String!
+	}
 
-type User {
-  _id:ID
-  username:String!
-  password:String!
-  email:String!
-  joinDate:String
-  favourites :[Recipe]
-}
+	type User {
+		_id: ID
+		username: String!
+		password: String!
+		email: String!
+		joinDate: String
+		favourites: [Recipe]
+	}
 
-type Query {
-  getAllRecipe : [Recipe]
-  getAllUser : [User]
-}
+	type Query {
+		getAllRecipe: [Recipe]
+		getAllUser: [User]
+	}
 
-type Mutation {
-  addRecipe (input:RecipeInput) : Recipe
-  # addUser (input:UserInput) : User
-  signUp (input:UserInput): Token
-}
+	type Mutation {
+		addRecipe(input: RecipeInput): Recipe
+		signUp(input: UserInput): Token
+	}
 
-input UserInput {
-  username:String!
-  password:String!
-  email:String!
-}
+	input UserInput {
+		username: String!
+		password: String!
+		email: String!
+	}
 
-input RecipeInput {
-  name:String!
-  category:String!
-  description:String!
-  instructions:String!
-  username:String!
-} 
+	input RecipeInput {
+		name: String!
+		category: String!
+		description: String!
+		instructions: String!
+		username: String!
+	}
 
-type Token {
-  token :String
-}
-
+	type Token {
+		token: String
+	}
 `;
