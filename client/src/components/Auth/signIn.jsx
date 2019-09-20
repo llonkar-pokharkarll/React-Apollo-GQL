@@ -25,6 +25,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import styles from './myStyle';
 import schema from '../../configs/ValSchema';
+import InputBase from '@material-ui/core/InputBase';
 
 class SignIn extends React.Component {
 	constructor(props) {
@@ -87,7 +88,7 @@ class SignIn extends React.Component {
 
 		return (
 			<Container component='main' maxWidth='xs'>
-				<CssBaseline />
+				{/* <CssBaseline /> */}
 				<div className={classes.paper}>
 					<Avatar className={classes.avatar}>
 						<LockOutlinedIcon />
@@ -95,50 +96,58 @@ class SignIn extends React.Component {
 					<Typography component='h1' variant='h5'>
 						Login
 					</Typography>
-					<form className={classes.form} noValidate>
+					<form className={classes.form} noValidate autoComplete='off'>
+						<br />
+						<Typography component='h1' variant='h6'>
+							Email
+						</Typography>
+
 						<TextField
 							variant='outlined'
-							margin='normal'
+							// margin='normal'
 							required
 							fullWidth
 							onClick={this.handleTextChange}
 							onChange={this.handleTextChange}
 							id='email'
-							label='Email Address'
 							name='email'
 							autoComplete='email'
 							autoFocus
 							error={emailField}
 							helperText={emailHelper}
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<MailIcon />
-									</InputAdornment>
-								),
-							}}
+							// InputProps={{
+							// 	startAdornment: (
+							// 		<InputAdornment position='start'>
+							// 			<MailIcon />
+							// 		</InputAdornment>
+							// 	),
+							// }}
 						/>
+
+						<Typography component='h1' variant='h6'>
+							Password
+						</Typography>
 						<TextField
 							variant='outlined'
-							margin='normal'
+							// margin='normal'
 							required
 							fullWidth
 							name='password'
 							onClick={this.handleTextChange}
 							onChange={this.handleTextChange}
-							label='Password'
+							// label='Password'
 							type='password'
 							error={passwordField}
 							helperText={passwordHelper}
 							id='password'
 							autoComplete='current-password'
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<VisibilityOff />
-									</InputAdornment>
-								),
-							}}
+							// InputProps={{
+							// 	startAdornment: (
+							// 		<InputAdornment position='start'>
+							// 			<VisibilityOff />
+							// 		</InputAdornment>
+							// 	),
+							// }}
 						/>
 
 						<Button
