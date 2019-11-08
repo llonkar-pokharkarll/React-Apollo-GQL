@@ -7,7 +7,10 @@ const createToken = ({ username, email }, secret, expiresIn) => {
 
 export const resolvers = {
 	Query: {
-		getAllUser: () => {},
+		getAllUser: async (root, args, { User }) => {
+			const allUser = await User.find();
+			return allUser;
+		},
 		getAllRecipe: async (root, args, { Recipe }) => {
 			const allRecipes = await Recipe.find();
 			return allRecipes;

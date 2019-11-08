@@ -1,12 +1,170 @@
 import React from 'react';
-// import Recipes from '../queries/queryComponent';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import styles from './myStyle';
+import schema from '../../configs/ValSchema';
 
-function signUp() {
-	return (
-		<div>
-			<h1>signUp</h1>
-		</div>
-	);
+class SignUp extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			email: '',
+			password: '',
+			error: {},
+			dialogError: true,
+			touched: {},
+		};
+	}
+
+	handleTextChange = e => {
+		const { touched } = this.state;
+		touched[e.target.name] = true;
+		this.setState(
+			{
+				touched,
+				[e.target.name]: e.target.value,
+			},
+			this.validation,
+		);
+	};
+
+	validation = () => {
+		const { email, password } = this.state;
+		schema
+			.validate({ email, password }, { abortEarly: false })
+			.then(res => {
+				this.setState({
+					dialogError: false,
+					error: {},
+				});
+			})
+			.catch(err => {
+				const parsedError = [];
+				err.inner.map(item => {
+					if (!parsedError[item.path]) {
+						parsedError[item.path] = item.message;
+					}
+					return null;
+				});
+
+				this.setState({
+					error: parsedError,
+					dialogError: true,
+				});
+			});
+	};
+
+	render() {
+		// const { error, dialogError, touched } = this.state;
+		const { classes } = this.props;
+		// const { email, password } = error;
+		// const emailField = 'email' in error && 'email' in touched;
+		// const passwordField = 'password' in error && 'password' in touched;
+		// const emailHelper = emailField ? email : '';
+		// const passwordHelper = passwordField ? password : '';
+
+		return (
+			<Container component="main" maxWidth="xs">
+				{/* <CssBaseline /> */}
+				<div className={classes.paper}>
+					<Avatar className={classes.avatar}>
+						<LockOutlinedIcon />
+					</Avatar>
+					<Typography component="h1" variant="h5">
+						SignUp
+					</Typography>
+					<form className={classes.form} noValidate autoComplete="off">
+						<br />
+
+						<Typography component="h1" variant="h6">
+							Username
+						</Typography>
+
+						<TextField
+							variant="outlined"
+							// margin='normal'
+							required
+							fullWidth
+							onClick={this.handleTextChange}
+							onChange={this.handleTextChange}
+							id="Username"
+							name="Username"
+							autoComplete="Username"
+							autoFocus
+						/>
+
+						<Typography component="h1" variant="h6">
+							Email
+						</Typography>
+
+						<TextField
+							variant="outlined"
+							// margin='normal'
+							required
+							fullWidth
+							onClick={this.handleTextChange}
+							onChange={this.handleTextChange}
+							id="email"
+							name="email"
+							autoComplete="email"
+							autoFocus
+						/>
+
+						<Typography component="h1" variant="h6">
+							Password
+						</Typography>
+
+						<TextField
+							variant="outlined"
+							// margin='normal'
+							required
+							fullWidth
+							name="password"
+							onClick={this.handleTextChange}
+							onChange={this.handleTextChange}
+							// label='Password'
+							type="password"
+							id="password"
+							autoComplete="current-password"
+						/>
+
+						<Typography component="h1" variant="h6">
+							Confirm Password
+						</Typography>
+
+						<TextField
+							variant="outlined"
+							// margin='normal'
+							required
+							fullWidth
+							name="currentPassword"
+							onClick={this.handleTextChange}
+							onChange={this.handleTextChange}
+							// label='Password'
+							type="Password"
+							id="Confirm Password"
+							autoComplete="off"
+						/>
+
+						<Button
+							type="submit"
+							// disabled={dialogError}
+							fullWidth
+							variant="contained"
+							color="primary"
+							className={classes.submit}>
+							Sign In
+						</Button>
+					</form>
+				</div>
+			</Container>
+		);
+	}
 }
 
-export default signUp;
+export default withStyles(styles)(SignUp);
